@@ -1,4 +1,5 @@
 --Game: Rememed meme game (https://www.roblox.com/games/6031035699/rememed-meme-game)
+
 if game.PlaceId ~= 6031035699 then return end
 if getfenv()._H4X then
 	return warn("Already running!")

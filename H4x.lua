@@ -441,21 +441,6 @@ task.spawn(function()
 	do
 		task.spawn(function()
 			local NewTb = {};
-			(coroutine.wrap(function()
-
-				xpcall(function()
-					NewTb = HttpService:JSONDecode(readfile("PlayerStats.json"))
-					while task.wait(.3) do
-						local Tb = HttpService:JSONDecode(readfile("PlayerStats.json"))
-						for i,v in pairs(NewTb) do
-							Tb[i] = v
-						end
-						writefile("PlayerStats.json", HttpService:JSONEncode(Tb))
-					end
-				end, function(...)
-					return rconsoleprint(({...})[1].."\n\n\n"..debug.traceback())
-				end)
-			end))();
 			local function NewPlayerAdded(Plr)
 				local Stats = Plr:WaitForChild("Stats")
 
@@ -711,7 +696,7 @@ task.spawn(function()
 	end
 
 	--Leaderboard extra buttons
-	do
+	do task.spawn(function()
 		local CurrentSpectating = nil
 
 		local function Spectate(Plr)
@@ -804,7 +789,7 @@ task.spawn(function()
 				ScrollingFrameClippingFrameAdded(obj)
 			end
 		end)
-	end
+	end) end
 
 	--// I was forced to add this because stupid dev
 	--// Added useless feature to kick anybody whoever
